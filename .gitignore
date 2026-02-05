@@ -12,5 +12,8 @@ wheels/
 # Node
 node_modules/
 
+# npm
+.npmrc
+
 pi-interactive-shell/
 *.bundle
