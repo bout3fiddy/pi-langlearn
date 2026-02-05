@@ -16,3 +16,5 @@
 - TypeScript build config uses `tsconfig.build.json` (emits to `dist/`) with `tsconfig.json` for typecheck-only.
 - `package.json` publishes `dist/` with `main` and `types` pointing at `dist/index.js` and `dist/index.d.ts`; `prepublishOnly` runs `bun run build`.
 - Release automation lives in `scripts/release.ts` (`bun run release [patch|minor|major] [--git-tag] [--push]`).
+- Linting uses `oxlint` (`bun run lint`), formatting uses `oxfmt` (`bun run format`), and `bun run check` runs typecheck + lint + format check.
+- Pre-commit hooks are managed by `lefthook` (see `lefthook.yml`).

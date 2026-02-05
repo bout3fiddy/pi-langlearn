@@ -307,10 +307,7 @@ function updateSm2(state: SrsState, quality: number, now: number): SrsState {
   else interval = Math.round(interval * ease);
 
   // SM-2 ease update
-  ease = Math.max(
-    MIN_EASE,
-    ease + (0.1 - (5 - quality) * (0.08 + (5 - quality) * 0.02)),
-  );
+  ease = Math.max(MIN_EASE, ease + (0.1 - (5 - quality) * (0.08 + (5 - quality) * 0.02)));
 
   return {
     ...state,
@@ -646,9 +643,7 @@ export default function (pi: ExtensionAPI) {
         controller.pauseOrCloseOverlay(ctx);
       }
       ctx.ui.notify(
-        controller.isEnabled()
-          ? "Dutch learning enabled"
-          : "Dutch learning disabled",
+        controller.isEnabled() ? "Dutch learning enabled" : "Dutch learning disabled",
         "info",
       );
     },
