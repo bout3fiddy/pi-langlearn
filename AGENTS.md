@@ -10,6 +10,7 @@
 - LLM grading is always attempted; `settings.mode` no longer gates tutor usage (fallback to strict-free on failure).
 - Overlay now auto-opens only while the agent is busy; Esc hides it until the next busy cycle (toggle still controls enable/disable).
 - Extension source now lives under `src/` with entrypoint `src/index.ts`; packaging uses the `pi.extensions` manifest to point there.
+- Project-local Pi loads the extension via `.pi/extensions/pi-langlearn` (symlink to repo root) using the package manifest.
 - Language-specific assets live under `src/languages/<code>/` with registry + aliases in `src/languages/index.ts`; `/langlearn <language>` is the primary command.
 - `src/` is organized into `app/` (controller), `core/` (engine, state, config), `ui/` (overlay + render helpers), plus `content/` and `languages/`.
 - Language modules now live in `src/languages/<code>/index.ts` + `builtin-deck.ts`, with shared `LanguageDefinition` in `src/languages/types.ts` and registry in `src/languages/index.ts`.
