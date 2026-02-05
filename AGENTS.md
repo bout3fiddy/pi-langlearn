@@ -1,0 +1,18 @@
+# AGENTS
+
+- `pi-interactive-shell/` contains a complete Pi extension with overlay + widget patterns (`ctx.ui.custom`, `ctx.ui.setWidget`) used as a reference.
+- `pyproject.toml` is present; Python tooling should use `uv` if needed.
+- Root now contains the pi-langlearn extension package with entrypoint `index.ts` and supporting modules (learning engine, overlay, persistence).
+- Tatoeba online-first cache integrates via `content/content-store.ts` and stores cards in `~/.agents/pi-langlearn/caches/tatoeba-nl-en.json` with attribution updates in `attribution/SOURCES.md`.
+- Optional LLM grading uses `tutor-session.ts` with Pi model discovery (no new keys) and falls back to strict-free grading on failure.
+- Question types now include `de_het` and `reorder`, wired through `question-generator.ts`, `grader.ts`, and `overlay-component.ts`.
+- Overlay now opens whenever learning is enabled (always-on); busy/idle only updates status text, not visibility.
+- LLM grading is always attempted; `settings.mode` no longer gates tutor usage (fallback to strict-free on failure).
+- Overlay now auto-opens only while the agent is busy; Esc hides it until the next busy cycle (toggle still controls enable/disable).
+- Extension source now lives under `src/` with entrypoint `src/index.ts`; packaging uses the `pi.extensions` manifest to point there.
+- Language-specific assets live under `src/languages/<code>/` with registry + aliases in `src/languages/index.ts`; `/langlearn <language>` is the primary command.
+- `src/` is organized into `app/` (controller), `core/` (engine, state, config), `ui/` (overlay + render helpers), plus `content/` and `languages/`.
+- Language modules now live in `src/languages/<code>/index.ts` + `builtin-deck.ts`, with shared `LanguageDefinition` in `src/languages/types.ts` and registry in `src/languages/index.ts`.
+- TypeScript build config uses `tsconfig.build.json` (emits to `dist/`) with `tsconfig.json` for typecheck-only.
+- `package.json` publishes `dist/` with `main` and `types` pointing at `dist/index.js` and `dist/index.d.ts`; `prepublishOnly` runs `bun run build`.
+- Release automation lives in `scripts/release.ts` (`bun run release [patch|minor|major] [--git-tag] [--push]`).
